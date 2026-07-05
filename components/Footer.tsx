@@ -1,41 +1,92 @@
-const links = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
-  { label: "Medical Disclaimer", href: "#security" },
-  { label: "Contact", href: "mailto:info@iatrics.ng" },
+import Link from "next/link";
+import { AtSign, Globe2, MessageCircle, Share2 } from "lucide-react";
+import { siteConfig } from "@/lib/site";
+
+const footerGroups = [
+  {
+    title: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "News", href: "/news" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Healthcare",
+    links: [
+      { label: "Services", href: "/services" },
+      { label: "Specialties", href: "/specialties" },
+      { label: "For Patients", href: "/for-patients" },
+      { label: "For Doctors", href: "/for-doctors" },
+      { label: "Partners", href: "/partners" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Knowledge Centre", href: "/knowledge-centre" },
+      { label: "Help Centre", href: "/help-centre" },
+      { label: "Frequently Asked Questions", href: "/frequently-asked-questions" },
+      { label: "Support", href: "mailto:support@iatrics.ng" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms", href: "/terms-of-service" },
+      { label: "Cookie Policy", href: "/cookie-policy" },
+      { label: "Medical Disclaimer", href: "/medical-disclaimer" },
+    ],
+  },
+];
+
+const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/iatrics", icon: Share2 },
+  { label: "X", href: "https://twitter.com/iatricsng", icon: AtSign },
+  { label: "Instagram", href: "https://www.instagram.com/iatricsng", icon: MessageCircle },
+  { label: "Facebook", href: "https://www.facebook.com/iatricsng", icon: Globe2 },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-blue-100 bg-white py-10">
-      <div className="section-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div>
-          <a
-            href="#top"
-            className="focus-ring inline-flex items-center gap-2 rounded-full"
-            aria-label="Iatrics home"
-          >
-            <span className="flex size-9 items-center justify-center rounded-lg bg-brand-navy text-base font-bold text-white">
-              I
-            </span>
-            <span className="text-xl font-bold text-brand-navy">Iatrics</span>
-          </a>
-          <p className="mt-3 text-sm text-slate-600">
-            Healthcare Without Borders
-          </p>
-          <p className="mt-1 text-sm text-slate-500">iatrics.ng</p>
+    <footer className="border-t border-blue-100 bg-white">
+      <div className="section-shell py-12">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_1.9fr]">
+          <div>
+            <Link href="/" className="focus-ring inline-flex items-center gap-2 rounded-full" aria-label="Iatrics home">
+              <span className="flex size-9 items-center justify-center rounded-lg bg-brand-navy text-base font-bold text-white">I</span>
+              <span className="text-xl font-bold text-brand-navy">Iatrics</span>
+            </Link>
+            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">{siteConfig.description}</p>
+            <p className="mt-4 text-sm font-semibold text-brand-navy">{siteConfig.domain}</p>
+            <div className="mt-5 flex gap-3">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <a key={label} href={href} aria-label={label} className="focus-ring flex size-10 items-center justify-center rounded-full border border-blue-100 text-brand-blue transition hover:bg-brand-ice">
+                  <Icon size={18} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {footerGroups.map((group) => (
+              <nav key={group.title} aria-label={group.title}>
+                <h2 className="text-sm font-semibold text-brand-navy">{group.title}</h2>
+                <div className="mt-4 grid gap-3">
+                  {group.links.map((link) => (
+                    <Link key={link.label} href={link.href} className="focus-ring rounded-full text-sm text-slate-600 transition hover:text-brand-blue">
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+            ))}
+          </div>
         </div>
-        <nav className="flex flex-wrap gap-x-5 gap-y-3" aria-label="Footer">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="focus-ring rounded-full text-sm font-medium text-slate-600 transition hover:text-brand-blue"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <div className="mt-10 border-t border-blue-100 pt-6 text-sm text-slate-500">
+          © {new Date().getFullYear()} Iatrics. Healthcare Without Borders.
+        </div>
       </div>
     </footer>
   );

@@ -1,49 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Inter } from "next/font/google";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { createMetadata, healthcareOrganizationJsonLd } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
-const title = "Iatrics | Healthcare Without Borders";
-const description =
-  "Iatrics is a Nigerian telemedicine platform connecting patients with licensed doctors through secure video consultations, appointment booking, prescriptions, and follow-up care.";
+const geist = Geist({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist",
+});
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://iatrics.ng"),
-  title,
-  description,
-  applicationName: "Iatrics",
-  keywords: [
-    "Iatrics",
-    "telemedicine Nigeria",
-    "online doctor Nigeria",
-    "video consultation",
-    "digital prescriptions",
-    "healthcare technology",
-  ],
-  authors: [{ name: "Iatrics" }],
-  creator: "Iatrics",
-  publisher: "Iatrics",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://iatrics.ng",
-    siteName: "Iatrics",
-    title,
-    description,
-    locale: "en_NG",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+export const metadata: Metadata = createMetadata({
+  title: "Iatrics",
+  description:
+    "Iatrics is a Nigerian digital healthcare ecosystem connecting patients, doctors, hospitals and healthcare organizations through secure telemedicine, specialist consultations, digital health services and medical education.",
+});
 
 export default function RootLayout({
   children,
@@ -51,8 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={`${inter.variable} ${geist.variable}`}>
+      <body className="font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(healthcareOrganizationJsonLd) }}
+        />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,5 +1,5 @@
 {
-  "name": "iatrics-landing-page",
+  "name": "iatrics-corporate-website",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,8 +9,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
-    "next": "^16.2.10",
+    "next": "15.5.20",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
@@ -18,14 +19,14 @@
     "postcss": "^8.5.16"
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
+    "@types/node": "^20.19.43",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.22",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.10",
+    "eslint-config-next": "15.5.20",
     "postcss": "^8.5.16",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^5.5.3"
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
   }
 }
