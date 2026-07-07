@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {
+  Activity,
   ArrowRight,
   CheckCircle2,
   Download,
@@ -28,6 +29,7 @@ import {
   values,
 } from "@/lib/content";
 import { siteConfig } from "@/lib/site";
+import { getCmsFaqs, getCmsServices, getCmsSpecialties, getCmsTestimonials, getHomepageBanner } from "@/lib/sanity/data";
 
 function PillList({ items }: { items: string[] }) {
   return (
@@ -82,7 +84,26 @@ function ContactBlock() {
   );
 }
 
-export function CorporateHome() {
+export async function CorporateHome() {
+  const [banner, cmsServices, cmsSpecialties, cmsFaqs, cmsTestimonials] = await Promise.all([
+    getHomepageBanner(),
+    getCmsServices(),
+    getCmsSpecialties(),
+    getCmsFaqs(),
+    getCmsTestimonials(),
+  ]);
+  const serviceItems = cmsServices.map((item) => ({
+    title: item.name,
+    text: item.description || "A secure Iatrics digital healthcare service for patients, providers and partners.",
+    icon: Activity,
+  }));
+  const specialtyItems = cmsSpecialties.map((item) => item.name);
+  const testimonialItems = cmsTestimonials.map((item) => ({
+    quote: item.quote,
+    name: item.name,
+    role: item.role || "Iatrics community",
+  }));
+
   return (
     <>
       <section id="top" className="overflow-hidden bg-[linear-gradient(135deg,#f7fcff_0%,#ffffff_48%,#e9fbfb_100%)] py-16 sm:py-20 lg:py-24">
@@ -90,21 +111,21 @@ export function CorporateHome() {
           <MotionReveal>
             <p className="eyebrow">Iatrics digital healthcare ecosystem</p>
             <h1 className="mt-4 max-w-4xl text-5xl font-semibold tracking-normal text-brand-navy sm:text-6xl lg:text-7xl">
-              Healthcare Without Borders
+              {banner?.headline || "Healthcare Without Borders"}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
-              Connecting patients with licensed healthcare professionals through secure digital consultations.
+              {banner?.subheadline || "Connecting patients with licensed healthcare professionals through secure digital consultations."}
             </p>
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
               Iatrics connects patients, doctors, hospitals and healthcare organizations through telemedicine, specialist consultations, digital health services and medical education.
             </p>
             <p className="mt-3 text-sm font-semibold text-brand-blue">{siteConfig.serviceAreaStatement}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="#beta" className="primary-button gap-2">
+              <Link href={banner?.primaryButtonUrl || "#beta"} className="primary-button gap-2">
                 <Download size={18} aria-hidden="true" />
-                Download App
+                {banner?.primaryButtonText || "Download App"}
               </Link>
-              <Link href="#beta" className="secondary-button">Join Waiting List</Link>
+              <Link href={banner?.secondaryButtonUrl || "#beta"} className="secondary-button">{banner?.secondaryButtonText || "Join Waiting List"}</Link>
               <Link href="/for-doctors" className="secondary-button">Become a Provider</Link>
             </div>
           </MotionReveal>
@@ -159,7 +180,7 @@ export function CorporateHome() {
         <div className="section-shell">
           <SectionHeading eyebrow="Our Services" title="Digital health services built for real clinical workflows." />
           <div className="mt-10">
-            <IconGrid items={services} />
+            <IconGrid items={serviceItems.length ? serviceItems : services} />
           </div>
         </div>
       </section>
@@ -173,7 +194,7 @@ export function CorporateHome() {
             align="center"
           />
           <div className="mt-10">
-            <PillList items={specialties} />
+            <PillList items={specialtyItems.length ? specialtyItems : specialties} />
           </div>
         </div>
       </section>
@@ -258,7 +279,7 @@ export function CorporateHome() {
         <div className="section-shell">
           <SectionHeading eyebrow="Testimonials" title="Built with patients, doctors and partners in mind." align="center" />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {testimonials.map((item) => (
+            {(testimonialItems.length ? testimonialItems : testimonials).map((item) => (
               <article key={item.name} className="card p-6">
                 <p className="text-base leading-8 text-slate-700">“{item.quote}”</p>
                 <p className="mt-6 font-semibold text-brand-navy">{item.name}</p>
@@ -287,7 +308,7 @@ export function CorporateHome() {
       <section id="faq" className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="section-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <SectionHeading eyebrow="FAQ" title="Frequently asked questions before launch." />
-          <FAQAccordion />
+          <FAQAccordion items={cmsFaqs} />
         </div>
       </section>
 

@@ -35,10 +35,12 @@ export function createMetadata({
   title,
   description = siteConfig.description,
   path = "/",
+  image,
 }: {
   title: string;
   description?: string;
   path?: string;
+  image?: string;
 }): Metadata {
   const url = new URL(path, siteConfig.url).toString();
   const fullTitle =
@@ -61,11 +63,13 @@ export function createMetadata({
       siteName: siteConfig.name,
       type: "website",
       locale: "en_NG",
+      images: image ? [{ url: image }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
+      images: image ? [image] : undefined,
     },
     manifest: "/site.webmanifest",
     icons: {

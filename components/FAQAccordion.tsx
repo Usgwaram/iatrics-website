@@ -3,13 +3,14 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { faqs } from "@/lib/content";
+import type { CmsFaq } from "@/lib/sanity/types";
 
-export function FAQAccordion() {
+export function FAQAccordion({ items = faqs }: { items?: CmsFaq[] }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <div className="divide-y divide-blue-100 rounded-lg border border-blue-100 bg-white shadow-sm">
-      {faqs.map((faq, index) => {
+      {items.map((faq, index) => {
         const isOpen = openIndex === index;
         const panelId = `faq-panel-${index}`;
         const buttonId = `faq-button-${index}`;
