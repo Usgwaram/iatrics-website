@@ -59,8 +59,26 @@ export function Footer() {
               <span className="flex size-9 items-center justify-center rounded-lg bg-brand-navy text-base font-bold text-white">I</span>
               <span className="text-xl font-bold text-brand-navy">Iatrics</span>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-6 text-slate-600">{siteConfig.description}</p>
-            <p className="mt-4 text-sm font-semibold text-brand-navy">{siteConfig.domain}</p>
+            <p className="mt-2 text-sm font-semibold text-brand-teal">Healthcare Without Borders</p>
+            <div className="mt-5 grid gap-3 text-sm leading-6 text-slate-600">
+              <div>
+                <p className="font-semibold text-brand-navy">Head Office</p>
+                <p>{siteConfig.headOffice}</p>
+              </div>
+              <div>
+                <p className="font-semibold text-brand-navy">Email</p>
+                <p>{siteConfig.email}</p>
+              </div>
+              <div>
+                <p className="font-semibold text-brand-navy">Support</p>
+                <p>{siteConfig.supportEmail}</p>
+              </div>
+              <div>
+                <p className="font-semibold text-brand-navy">Website</p>
+                <p>{siteConfig.website}</p>
+              </div>
+            </div>
+            <p className="mt-4 max-w-sm text-sm font-semibold leading-6 text-brand-navy">{siteConfig.serviceAreaStatement}</p>
             <div className="mt-5 flex gap-3">
               {socials.map(({ label, href, icon: Icon }) => (
                 <a key={label} href={href} aria-label={label} className="focus-ring flex size-10 items-center justify-center rounded-full border border-blue-100 text-brand-blue transition hover:bg-brand-ice">

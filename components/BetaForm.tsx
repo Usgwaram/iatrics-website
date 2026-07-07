@@ -114,7 +114,7 @@ export function BetaForm() {
                 name="city"
                 autoComplete="address-level2"
                 className="focus-ring rounded-lg border border-blue-100 px-4 py-3 text-sm font-normal text-brand-ink"
-                placeholder="Lagos, Abuja, Port Harcourt..."
+                placeholder="Abuja, Kano, Port Harcourt..."
               />
             </div>
             <div className="grid gap-2 sm:col-span-2">

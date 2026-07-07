@@ -3,6 +3,37 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { LeadForm } from "./LeadForm";
 import { MotionReveal } from "./MotionReveal";
 import type { SitePage } from "@/lib/pages";
+import { siteConfig } from "@/lib/site";
+
+function ProfessionalContactBlock() {
+  return (
+    <section className="card p-6 sm:p-8" aria-labelledby="professional-contact-block">
+      <h2 id="professional-contact-block" className="text-2xl font-semibold tracking-normal text-brand-navy">
+        Iatrics
+      </h2>
+      <p className="mt-1 text-sm font-semibold text-brand-teal">Healthcare Without Borders</p>
+      <div className="mt-6 grid gap-4 text-sm leading-6 text-slate-700 sm:grid-cols-2">
+        <div>
+          <p className="font-semibold text-brand-navy">Head Office</p>
+          <p>{siteConfig.headOffice}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Email</p>
+          <p>{siteConfig.email}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Support</p>
+          <p>{siteConfig.supportEmail}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Website</p>
+          <p>{siteConfig.website}</p>
+        </div>
+      </div>
+      <p className="mt-6 text-sm font-semibold text-brand-navy">{siteConfig.serviceAreaStatement}</p>
+    </section>
+  );
+}
 
 export function PageTemplate({ page }: { page: SitePage }) {
   return (
@@ -24,6 +55,7 @@ export function PageTemplate({ page }: { page: SitePage }) {
       <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="section-shell grid gap-8 lg:grid-cols-[1fr_0.8fr]">
           <div className="grid gap-5">
+            {page.slug === "contact" ? <ProfessionalContactBlock /> : null}
             {page.sections.map((section, index) => (
               <MotionReveal key={section.title} delay={index * 0.05}>
                 <article className="card p-6 sm:p-8">

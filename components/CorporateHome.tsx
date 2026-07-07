@@ -54,6 +54,34 @@ function BenefitList({ items }: { items: string[] }) {
   );
 }
 
+function ContactBlock() {
+  return (
+    <div className="mt-8 rounded-lg bg-white p-5 shadow-sm">
+      <p className="text-lg font-semibold text-brand-navy">Iatrics</p>
+      <p className="text-sm font-semibold text-brand-teal">Healthcare Without Borders</p>
+      <div className="mt-5 grid gap-4 text-sm text-slate-700">
+        <div>
+          <p className="font-semibold text-brand-navy">Head Office</p>
+          <p>{siteConfig.headOffice}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Email</p>
+          <p>{siteConfig.email}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Support</p>
+          <p>{siteConfig.supportEmail}</p>
+        </div>
+        <div>
+          <p className="font-semibold text-brand-navy">Website</p>
+          <p>{siteConfig.website}</p>
+        </div>
+      </div>
+      <p className="mt-5 text-sm font-semibold text-brand-navy">{siteConfig.serviceAreaStatement}</p>
+    </div>
+  );
+}
+
 export function CorporateHome() {
   return (
     <>
@@ -70,6 +98,7 @@ export function CorporateHome() {
             <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
               Iatrics connects patients, doctors, hospitals and healthcare organizations through telemedicine, specialist consultations, digital health services and medical education.
             </p>
+            <p className="mt-3 text-sm font-semibold text-brand-blue">{siteConfig.serviceAreaStatement}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="#beta" className="primary-button gap-2">
                 <Download size={18} aria-hidden="true" />
@@ -271,7 +300,7 @@ export function CorporateHome() {
                 { label: "Email", value: siteConfig.email, icon: Mail },
                 { label: "WhatsApp", value: siteConfig.whatsapp, icon: MessageCircle },
                 { label: "Phone", value: siteConfig.phone, icon: Phone },
-                { label: "Location", value: siteConfig.address, icon: MapPin },
+                { label: "Head Office", value: siteConfig.headOffice, icon: MapPin },
               ].map(({ label, value, icon: Icon }) => (
                 <div key={label} className="flex items-center gap-3 rounded-lg bg-white p-4 shadow-sm">
                   <Icon size={20} className="text-brand-blue" aria-hidden="true" />
@@ -282,9 +311,10 @@ export function CorporateHome() {
                 </div>
               ))}
             </div>
+            <ContactBlock />
             <div className="mt-5 rounded-lg border border-blue-100 bg-white p-5">
               <p className="font-semibold text-brand-navy">Google Map</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Map embed placeholder for the future Iatrics office or support location in Lagos, Nigeria.</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">Map embed placeholder for the future Iatrics head office in Abuja, Federal Capital Territory, Nigeria.</p>
             </div>
           </div>
           <LeadForm title="Contact form" source="contact-form" />

@@ -10,9 +10,14 @@ export const siteConfig = {
   providersEmail: "providers@iatrics.ng",
   phone: "+234 800 IATRICS",
   whatsapp: "+234 800 IATRICS",
-  address: "Lagos, Nigeria",
+  website: "www.iatrics.ng",
+  headOffice: "Abuja, Federal Capital Territory, Nigeria",
+  address: "Abuja, Federal Capital Territory, Nigeria",
+  serviceAreaStatement:
+    "Serving patients and healthcare professionals across Nigeria.",
+  serviceAreaShort: "Serving Nigeria nationwide.",
   description:
-    "Iatrics is a Nigerian digital healthcare ecosystem connecting patients, doctors, hospitals and healthcare organizations through secure telemedicine, specialist consultations, digital health services and medical education.",
+    "Iatrics is a Nigerian digital healthcare ecosystem headquartered in Abuja, serving patients and healthcare professionals across Nigeria through secure telemedicine, specialist consultations, digital health services and medical education.",
 };
 
 export const defaultKeywords = [
@@ -81,7 +86,9 @@ export const healthcareOrganizationJsonLd = {
   telephone: siteConfig.phone,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Lagos",
+    streetAddress: "Head Office",
+    addressLocality: "Abuja",
+    addressRegion: "Federal Capital Territory",
     addressCountry: "NG",
   },
   areaServed: {
